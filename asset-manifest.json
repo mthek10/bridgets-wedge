@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/motion-task-manager/static/css/main.3e896fa3.css",
+    "main.js": "/motion-task-manager/static/js/main.a07bbbb4.js",
+    "static/js/453.0c8aee65.chunk.js": "/motion-task-manager/static/js/453.0c8aee65.chunk.js",
+    "index.html": "/motion-task-manager/index.html",
+    "main.3e896fa3.css.map": "/motion-task-manager/static/css/main.3e896fa3.css.map",
+    "main.a07bbbb4.js.map": "/motion-task-manager/static/js/main.a07bbbb4.js.map",
+    "453.0c8aee65.chunk.js.map": "/motion-task-manager/static/js/453.0c8aee65.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e896fa3.css",
+    "static/js/main.a07bbbb4.js"
+  ]
+}
