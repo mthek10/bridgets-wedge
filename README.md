@@ -1,3 +1,33 @@
+# Bridget's Wedge - Motion Task Manager
+
+A custom Kanban board application built with React that integrates with the Motion API to manage tasks.
+
+## Features
+
+- View tasks organized in Overdue, On Track, and Completed columns
+- Add new tasks with title, description, priority, and due date
+- Delete tasks
+- Automatic refresh of task data
+- Responsive design with color-coded task cards
+- Simple authentication system
+
+## Getting Started
+
+1. Clone this repository
+2. Install dependencies with `npm install`
+3. Create a `.env` file with your Motion API key:
+   ```
+   REACT_APP_MOTION_API_KEY=your_api_key_here
+   ```
+4. Start the development server with `npm start`
+
+## Technologies Used
+
+- React
+- Motion API
+- CSS3 with Flexbox
+- Local Storage for authentication
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

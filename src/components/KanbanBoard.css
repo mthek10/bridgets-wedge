@@ -1,0 +1,560 @@
+/* Add these styles at the top of your KanbanBoard.css file */
+body {
+  background: linear-gradient(135deg, #1a1a1a 0%, #222222 100%);
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app {
+  background-color: #1a1a1a;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.app-header {
+  display: none; /* Hide the old header */
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #0052a3;
+}
+
+.kanban-container {
+  padding: 20px 0; /* Remove horizontal padding */
+  background-color: #1a1a1a;
+  height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
+  overflow: hidden;
+}
+
+.kanban-board {
+  display: flex;
+  gap: 16px;
+  padding: 0;
+  height: calc(100vh - 120px);
+  overflow-x: auto;
+  width: 98%;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.kanban-board::after {
+  content: "";
+  flex: 0 0 20px; /* Add some space at the end for better scrolling */
+}
+
+.kanban-column {
+  flex: 1 1 0;
+  min-width: 280px;
+  max-width: 33%;
+  background: #2d2d2d;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.kanban-column h2 {
+  margin-bottom: 16px;
+  color: #61dafb;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  background-color: #2d2d2d;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.kanban-column[data-status="Overdue"] h2 {
+  color: #dc3545;
+  border-bottom-color: #dc3545;
+}
+
+.kanban-column[data-status="On Track"] h2 {
+  color: #28a745;
+  border-bottom-color: #28a745;
+}
+
+.kanban-column[data-status="Completed"] h2 {
+  color: #17a2b8;
+  border-bottom-color: #17a2b8;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 8px; /* Space for scrollbar */
+  height: calc(100% - 50px); /* Account for column header */
+  padding-bottom: 16px; /* Add some space at the bottom */
+}
+
+/* Fix task card sizing and scrolling */
+.task-card {
+  background-color: #363636;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+  word-break: break-word; /* Prevent text overflow */
+  width: calc(100% - 8px); /* Account for scrollbar */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px; /* Consistent spacing between cards */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.task-card h3 {
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Fix task details positioning */
+.task-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  margin-top: 12px; /* Consistent spacing */
+}
+
+.priority {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.priority.high {
+  background-color: #dc3545;
+}
+
+.priority.medium {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.priority.low {
+  background-color: #28a745;
+}
+
+.scheduled-date {
+  color: #888;
+}
+
+/* Update the form styles to match the dark theme */
+.new-task-form {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background-color: #2d2d2d;
+  border-radius: 5px;
+}
+
+.new-task-form input,
+.new-task-form select {
+  padding: 8px;
+  border: 1px solid #404040;
+  border-radius: 4px;
+  background-color: #363636;
+  color: #ffffff;
+}
+
+.new-task-form input::placeholder {
+  color: #888;
+}
+
+.new-task-form button {
+  padding: 8px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-task-form button:hover {
+  background-color: #0052a3;
+}
+
+/* Add these new styles to your existing KanbanBoard.css */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #2d2d2d, #333333);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 98%;
+  max-width: none;
+  margin: 0 auto 20px auto;
+}
+
+.kanban-header h1 {
+  margin: 0;
+  color: #61dafb;
+  font-size: 1.5rem;
+  background: linear-gradient(to right, #61dafb, #0066cc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Style for icon buttons - make them larger and consistent */
+.icon-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #363636; /* Muted background for both buttons */
+  color: #f5f5f5;
+  margin-left: 10px;
+}
+
+.icon-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #444444;
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+/* Make Add Task button the primary action */
+.add-task-button {
+  padding: 10px 20px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 16px;
+  font-size: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 102, 204, 0.3);
+}
+
+.add-task-button:hover {
+  background-color: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+}
+
+.add-task-button:active {
+  transform: translateY(0);
+}
+
+/* Update the form styles for modal context */
+.modal-content .new-task-form {
+  background: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #a0a5b1;
+  font-weight: 500;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.modal-content .new-task-form input,
+.modal-content .new-task-form select,
+.modal-content .new-task-form textarea {
+  padding: 10px;
+  background-color: #363636;
+  border: 1px solid #4a4f5c;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #f5f5f5;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-content .new-task-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-content .new-task-form button {
+  padding: 12px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.modal-content .new-task-form button:hover {
+  background: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add these to your existing CSS */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: #dc3545;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Ensure task description doesn't overflow */
+.task-description {
+  margin: 8px 0;
+  color: #888;
+  font-size: 0.9em;
+  line-height: 1.4;
+  max-height: 80px; /* Limit height */
+  overflow-y: auto; /* Add scrolling */
+  padding-right: 5px;
+}
+
+.task-assignees {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.assignee {
+  background-color: #4a4a4a;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  color: #fff;
+}
+
+/* Add these to your existing CSS */
+.last-refresh {
+  color: #888;
+  font-size: 0.9rem;
+  margin-right: 8px;
+}
+
+.refresh-hint {
+  color: #666;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* Improve scrollbar styling for all scrollable elements */
+.task-list::-webkit-scrollbar,
+.task-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list::-webkit-scrollbar-track,
+.task-description::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.task-list::-webkit-scrollbar-thumb,
+.task-description::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 3px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover,
+.task-description::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* Add a subtle pattern overlay for texture */
+.app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Color-code the task cards based on column */
+.kanban-column[data-status="Overdue"] .task-card {
+  background: linear-gradient(to right, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05));
+  border-left: 4px solid #dc3545;
+}
+
+.kanban-column[data-status="On Track"] .task-card {
+  background: linear-gradient(to right, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05));
+  border-left: 4px solid #28a745;
+}
+
+.kanban-column[data-status="Completed"] .task-card {
+  background: linear-gradient(to right, rgba(23, 162, 184, 0.1), rgba(23, 162, 184, 0.05));
+  border-left: 4px solid #17a2b8;
+}
+
+/* Add a subtle hover effect to cards */
+.task-card {
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.task-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Make the column headers more prominent */
+.kanban-column h2 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+/* Add a subtle glow to the add task button */
+.add-task-button {
+  box-shadow: 0 0 15px rgba(0, 102, 204, 0.3);
+}
+
+.add-task-button:hover {
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+}
+
+/* Add styles for the task header and delete button */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.task-header h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.delete-task-button {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.delete-task-button:hover {
+  color: #dc3545;
+  opacity: 1;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.task-card:hover .delete-task-button {
+  opacity: 0.8;
+} 
