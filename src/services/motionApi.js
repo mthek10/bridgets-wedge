@@ -133,6 +133,12 @@ export const motionApi = {
         projectId: PROJECT_ID,
         workspaceId: "_5GGL-17lxyLULA_ECneb", // Personal Workspace ID
         status: taskData.status || undefined,
+        autoScheduled: {
+          startDate: new Date().toISOString().split('T')[0], // Start today
+          deadlineType: taskData.dueDate ? "HARD" : "SOFT",
+          schedule: "Work Hours"
+        },
+        duration: taskData.duration || 60, // Default to 60 minutes if not specified
       };
 
       console.log('Sending task data to API:', formattedTaskData);
