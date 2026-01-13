@@ -4,6 +4,9 @@ import Modal from './Modal';
 import { motionApi } from '../services/motionApi';
 import './KanbanBoard.css';
 
+// Version from package.json - will be replaced during build
+const APP_VERSION = process.env.REACT_APP_VERSION || '0.2.0';
+
 const KanbanBoard = ({ onLogout }) => {
   const [tasks, setTasks] = useState({
     'Overdue': [],
@@ -171,7 +174,7 @@ const KanbanBoard = ({ onLogout }) => {
   return (
     <div className="kanban-container">
       <div className="kanban-header">
-        <h1>Bridget's Wedge</h1>
+        <h1>Bridget's Wedge <span className="app-version">v{APP_VERSION}</span></h1>
         <div className="header-actions">
           <span className="last-refresh">
             Last refreshed: {lastRefresh.toLocaleTimeString()}
