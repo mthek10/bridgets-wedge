@@ -42,15 +42,6 @@ const fetchWithAuth = async (endpoint, options = {}) => {
   return response.json();
 };
 
-// Task status mapping
-const STATUS_MAPPING = {
-  // TODO: Map Motion's task statuses to our Kanban columns
-  // Example:
-  // PAST_DUE: 'Overdue',
-  // IN_PROGRESS: 'On Track',
-  // DONE: 'Completed',
-};
-
 // Map Motion priorities to our display priorities
 const PRIORITY_MAPPING = {
   'ASAP': 'High',
