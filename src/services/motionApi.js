@@ -124,26 +124,25 @@ export const motionApi = {
   // Create a new task
   async createTask(taskData) {
     try {
+      // If no due date is provided, set it to tomorrow
+      const dueDate = taskData.dueDate || this.getTomorrowDate();
+
       // Format the task data according to the Motion API requirements
       const formattedTaskData = {
         name: taskData.name,
         description: taskData.description || '',
         priority: this.getPriorityForAPI(taskData.priority),
-        dueDate: taskData.dueDate,
+        dueDate: dueDate,
         projectId: PROJECT_ID,
         workspaceId: "_5GGL-17lxyLULA_ECneb", // Personal Workspace ID
         status: taskData.status || undefined,
         duration: taskData.duration || 30, // Default to 30 minutes if not specified
-      };
-
-      // Only add auto-scheduling if a due date is provided (required by Motion API)
-      if (taskData.dueDate) {
-        formattedTaskData.autoScheduled = {
+        autoScheduled: {
           startDate: new Date().toISOString().split('T')[0], // Start today
           deadlineType: "HARD",
           schedule: "Work Hours"
-        };
-      }
+        }
+      };
 
       console.log('Sending task data to API:', formattedTaskData);
       
@@ -183,6 +182,13 @@ export const motionApi = {
       'Low': 'LOW'
     };
     return priorityMap[priority] || 'MEDIUM';
+  },
+
+  // Helper method to get tomorrow's date in YYYY-MM-DD format
+  getTomorrowDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
   },
 
   // Helper to transform API response to Kanban format
